@@ -1,3 +1,13 @@
+重建步驟:
+1. 建立資料庫與使用者
+   - 資料庫: bookstore
+   - 使用者: bookstore
+   - 密碼: abc123
+
+2. 匯入 book.sql 到 bookstore 資料庫
+
+3. 下載php程式
+
 book fields:
 
  - 書名:    文字(100)
