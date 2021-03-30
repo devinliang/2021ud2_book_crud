@@ -25,21 +25,21 @@
 
 - c:/xampp/apache/conf/extra/httpd-vhosts.conf
 
-<VirtualHost *:80>
-    DocumentRoot "C:\xampp\htdocs"
-    ServerName localhost
-</VirtualHost>
-
-<VirtualHost *:80>
-    DocumentRoot "D:\devin\Github\2021ud2_book_crud"
-    ServerName 2021ud2.com
-</VirtualHost>
-
-<Directory "D:\devin\Github\2021ud2_book_crud">
-    Options Indexes FollowSymLinks Includes ExecCGI
-    AllowOverride All
-    Require all granted
-</Directory>
+    <VirtualHost *:80>
+        DocumentRoot "C:\xampp\htdocs"
+        ServerName localhost
+    </VirtualHost>
+    
+    <VirtualHost *:80>
+        DocumentRoot "D:\devin\Github\2021ud2_book_crud"
+        ServerName 2021ud2.com
+    </VirtualHost>
+    
+    <Directory "D:\devin\Github\2021ud2_book_crud">
+        Options Indexes FollowSymLinks Includes ExecCGI
+        AllowOverride All
+        Require all granted
+    </Directory>
 
 # 資料表欄位說明
 
