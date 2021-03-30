@@ -25,6 +25,7 @@
 
 - c:/xampp/apache/conf/extra/httpd-vhosts.conf
 
+```
     <VirtualHost *:80>
         DocumentRoot "C:\xampp\htdocs"
         ServerName localhost
@@ -40,6 +41,7 @@
         AllowOverride All
         Require all granted
     </Directory>
+```
 
 # 資料表欄位說明
 
