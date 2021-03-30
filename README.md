@@ -15,6 +15,32 @@
 - db_add.php - 新增 book 資料表 一筆項目
 - db_delete.php - 刪除 book 資料表的一筆項目
 
+
+# XAMPP 設定虛擬主機
+
+- c:/windows/system32/drivers/etc/hosts
+
+127.0.0.1 2021ud2.com
+
+
+- c:/xampp/apache/conf/extra/httpd-vhosts.conf
+
+<VirtualHost *:80>
+    DocumentRoot "C:\xampp\htdocs"
+    ServerName localhost
+</VirtualHost>
+
+<VirtualHost *:80>
+    DocumentRoot "D:\devin\Github\2021ud2_book_crud"
+    ServerName 2021ud2.com
+</VirtualHost>
+
+<Directory "D:\devin\Github\2021ud2_book_crud">
+    Options Indexes FollowSymLinks Includes ExecCGI
+    AllowOverride All
+    Require all granted
+</Directory>
+
 # 資料表欄位說明
 
 ## book fields:
