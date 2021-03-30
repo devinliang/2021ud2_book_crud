@@ -54,7 +54,7 @@ $conn = null;
       <th>出版社</th>
       <th>定價</th>
       <th>類型</th>
-      <th>功能</th>
+      <th><a href="db_add.php">新增</a></th>
     </tr>
 <?php
     $btype = array('1'=>"平裝", '2'=>'精裝', '3'=>'盒裝', '4'=>'其他');
@@ -68,6 +68,7 @@ $conn = null;
       echo "<td>". $d['price'] ."</td>";
       echo "<td>". $btype[$d['booktype']] ."</td>";
       echo "<td>";
+      echo '<a href="db_edit.php?bid='. $d['bid']. '">修改</a> ';
       echo '<a href="db_delete.php?bid='. $d['bid']. '" onclick="return confirm(\'確定要刪除這筆資料嗎?\');">刪除</a>';
       echo "</td>";
       echo "</tr>";
