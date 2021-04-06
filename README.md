@@ -12,7 +12,9 @@
 # 檔案說明
 
 - dblist.php - 列出 book 資料表 的所有項目
-- db_add.php - 新增 book 資料表 一筆項目
+- db_add.php - 新增 book 資料表 單筆項目
+- db_show.php - 顯示 book 資料表 單筆詳細資料
+- db_edit.php - 修改 book 資料表 單筆資料
 - db_delete.php - 刪除 book 資料表的一筆項目
 
 

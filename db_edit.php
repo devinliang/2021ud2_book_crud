@@ -4,6 +4,47 @@ $database = "bookstore";
 $username = "bookstore";
 $password = "abc123";
 
+// 判斷是否有表單送出
+if (isset($_POST['submit'])) { 
+  // update database
+  $bid = $_POST['bid'];
+  $bookname  = $_POST['bookname'];
+  $booktype  = $_POST['booktype'];
+  $author    = $_POST['author'];
+  $publisher = $_POST['publisher'];
+  $pubdate   = $_POST['pubdate'];
+  $price     = $_POST['price'];
+  $intro     = $_POST['intro'];
+
+  try {
+
+    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  
+    $sql = "UPDATE `book` SET 
+    `bookname` = '$bookname',
+    `booktype` = '$booktype',
+    `author`   = '$author',
+    `publisher`= '$publisher',
+    `pubdate`  = '$pubdate',
+    `price`    = '$price',
+    `intro`    = '$intro'
+    WHERE `book`.`bid` = '$bid';";
+
+    $sth = $conn->prepare($sql);
+    $sth->execute();
+
+    $msg = "資料更新完成!";
+
+  } catch(PDOException $e) {
+    
+    echo "無法連線 Connection failed: " . $e->getMessage();
+  
+  }
+
+}
+
+// 判斷是否有指定bid
 if (isset($_GET['bid']) && $_GET['bid']!='') {
 
     $bid = $_GET['bid'];
@@ -113,9 +154,7 @@ if (isset($_GET['bid']) && $_GET['bid']!='') {
 
             <div class="mb-3">
                 <label for="intro" class="form-label">簡介</label>
-                <textarea class="form-control" name="intro" id="intro" cols="80" rows="10">
-                <?php echo $d['intro'];?>
-                </textarea>
+                <textarea class="form-control" name="intro" id="intro" cols="80" rows="10"><?php echo $d['intro'];?></textarea>
             </div>
 
             <div class="mb-3 form-check">
@@ -128,6 +167,7 @@ if (isset($_GET['bid']) && $_GET['bid']!='') {
                 <input type="file" class="form-control" id="cover" name="cover">
             </div>
 
+           <input type="hidden" name="bid" value="<?php echo $d['bid']; ?>">
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
         </form>
     </div>
