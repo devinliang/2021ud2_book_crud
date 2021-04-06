@@ -61,3 +61,7 @@
 - 刪除一筆資料SQL指令
 
 DELETE FROM `book` WHERE `book`.`bid` = 10
+
+- 修改一筆資料SQL指令
+
+UPDATE `book` SET `intro` = 'jgkjhkjhasdfadsf' WHERE `book`.`bid` = 9;

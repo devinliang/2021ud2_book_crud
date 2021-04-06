@@ -1,8 +1,5 @@
 <?php
-$servername = "localhost";
-$database = "bookstore";
-$username = "bookstore";
-$password = "abc123";
+include_once('config.php');
 
 // 判斷是否有表單送出
 if (isset($_POST['submit'])) { 
@@ -82,19 +79,9 @@ if (isset($_GET['bid']) && $_GET['bid']!='') {
 
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
+<?php include('header.html'); ?>
 
-  <title>Book list</title>
-</head>
-<body>
-<div class="container">
+<div class="container" id="main">
         <h1 class="display-1">圖書資料修改</h1>
         <?php
            if (isset($msg)) {
@@ -168,14 +155,10 @@ if (isset($_GET['bid']) && $_GET['bid']!='') {
             </div>
 
            <input type="hidden" name="bid" value="<?php echo $d['bid']; ?>">
-            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+            <button type="submit" class="btn btn-primary" name="submit">確認修改</button>
         </form>
     </div>
 
   </div>
-  <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-  
-  
-</body>
-</html>
+
+  <?php include('footer.html'); ?>

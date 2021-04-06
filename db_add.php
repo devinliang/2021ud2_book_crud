@@ -1,4 +1,6 @@
 <?php
+include_once('config.php');
+
 if (isset($_POST["submit"])) {
 
     $bookname  = $_POST['bookname'];
@@ -8,11 +10,6 @@ if (isset($_POST["submit"])) {
     $pubdate   = $_POST['pubdate'];
     $price     = $_POST['price'];
     $intro     = $_POST['intro'];
-
-$servername = "localhost";
-$database = "bookstore";
-$username = "bookstore";
-$password = "abc123";
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);
@@ -35,21 +32,10 @@ try {
 $conn = null;
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<?php include('header.html'); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-</head>
-
-<body>
-    <div class="container">
-        <h1 class="display-1">圖書資料</h1>
+    <div class="container" id="main">
+        <h1 class="display-1">圖書資料新增</h1>
         <?php
            if (isset($msg)) {
                echo '<p class="alert alert-success">'.$msg."</p>";
@@ -117,13 +103,8 @@ $conn = null;
                 <input type="file" class="form-control" id="cover" name="cover">
             </div>
 
-            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+            <button type="submit" class="btn btn-primary" name="submit">確認新增</button>
         </form>
     </div>
 
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+<?php include('footer.html'); ?>

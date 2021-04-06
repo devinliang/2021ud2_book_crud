@@ -1,8 +1,5 @@
 <?php
-$servername = "localhost";
-$database = "bookstore";
-$username = "bookstore";
-$password = "abc123";
+include_once('config.php');
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);
@@ -32,21 +29,12 @@ try {
 
 $conn = null;
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- html hearder part -->
+<?php include('header.html'); ?>
+
+  <div class="container" id="main">
   
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
-  <title>Book list</title>
-</head>
-<body>
-
-  <div class="container">
-  <h1 class="text-center my-3">Book Store</h1>
   <table class="table">
     <tr>
       <th>出版日期</th>
@@ -57,29 +45,27 @@ $conn = null;
       <th>類型</th>
       <th><a href="db_add.php">新增</a></th>
     </tr>
-<?php
-    $btype = array('1'=>"平裝", '2'=>'精裝', '3'=>'盒裝', '4'=>'其他');
+    <?php
+        $btype = array('1'=>"平裝", '2'=>'精裝', '3'=>'盒裝', '4'=>'其他');
 
-    foreach ($ds as $d){
-      echo "<tr>";
-      echo "<td>". $d['pubdate'] ."</td>";
-      echo '<td><a href="db_show.php?bid=' . $d['bid'] . '">';
-      echo $d['bookname'] ."</a></td>";
-      echo "<td>". $d['author'] ."</td>";
-      echo "<td>". $d['publisher'] ."</td>";
-      echo "<td>". $d['price'] ."</td>";
-      echo "<td>". $btype[$d['booktype']] ."</td>";
-      echo "<td>";
-      echo '<a href="db_edit.php?bid='. $d['bid']. '">修改</a> ';
-      echo '<a href="db_delete.php?bid='. $d['bid']. '" onclick="return confirm(\'確定要刪除這筆資料嗎?\');">刪除</a>';
-      echo "</td>";
-      echo "</tr>";
-    }
-?>    
+        foreach ($ds as $d){
+          echo "<tr>";
+          echo "<td>". $d['pubdate'] ."</td>";
+          echo '<td><a href="db_show.php?bid=' . $d['bid'] . '">';
+          echo $d['bookname'] ."</a></td>";
+          echo "<td>". $d['author'] ."</td>";
+          echo "<td>". $d['publisher'] ."</td>";
+          echo "<td>". $d['price'] ."</td>";
+          echo "<td>". $btype[$d['booktype']] ."</td>";
+          echo "<td>";
+          echo '<a href="db_edit.php?bid='. $d['bid']. '">修改</a> ';
+          echo '<a href="db_delete.php?bid='. $d['bid']. '" onclick="return confirm(\'確定要刪除這筆資料嗎?\');">刪除</a>';
+          echo "</td>";
+          echo "</tr>";
+        }
+    ?>    
   </table>
 
   </div>
-  <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-</body>
-</html>
+
+ <?php include('footer.html'); ?>

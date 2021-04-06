@@ -1,8 +1,5 @@
 <?php
-$servername = "localhost";
-$database = "bookstore";
-$username = "bookstore";
-$password = "abc123";
+include_once('config.php');
 
 if (isset($_GET['bid']) && $_GET['bid']!='') {
 
@@ -41,19 +38,9 @@ if (isset($_GET['bid']) && $_GET['bid']!='') {
 
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
+<?php include('header.html'); ?>
 
-  <title>Book list</title>
-</head>
-<body>
-  <div class="container">
+  <div class="container" id="main">
   <h1 class="text-center my-3">Book details</h1>
   <table class="table">
     <tr><th nowrap>出版日期</th><td><?php echo $d['pubdate'];?></td></tr>
@@ -70,9 +57,5 @@ if (isset($_GET['bid']) && $_GET['bid']!='') {
   </table>
 
   </div>
-  <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-  
-  
-</body>
-</html>
+
+  <?php include('footer.html'); ?>
