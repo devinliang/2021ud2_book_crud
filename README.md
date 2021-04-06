@@ -16,6 +16,11 @@
 - db_show.php - 顯示 book 資料表 單筆詳細資料
 - db_edit.php - 修改 book 資料表 單筆資料
 - db_delete.php - 刪除 book 資料表的一筆項目
+- config.php - 資料庫的設定
+- header.html - 共同的頁首
+- footer.html - 共同的頁尾
+- dbtest - 測試資料庫是否可以連線
+- index.html - 測試靜態網頁連線
 
 
 # XAMPP 設定虛擬主機
