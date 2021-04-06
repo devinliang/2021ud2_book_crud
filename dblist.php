@@ -62,7 +62,8 @@ $conn = null;
     foreach ($ds as $d){
       echo "<tr>";
       echo "<td>". $d['pubdate'] ."</td>";
-      echo "<td>". $d['bookname'] ."</td>";
+      echo '<td><a href="db_show.php?bid=' . $d['bid'] . '">';
+      echo $d['bookname'] ."</a></td>";
       echo "<td>". $d['author'] ."</td>";
       echo "<td>". $d['publisher'] ."</td>";
       echo "<td>". $d['price'] ."</td>";
