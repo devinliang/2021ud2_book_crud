@@ -4,7 +4,7 @@ $database = "bookstore";
 $username = "bookstore";
 $password = "abc123";
 
-if (isset($_GET['bid'])) {
+if (isset($_GET['bid']) && $_GET['bid']!='') {
 
     $bid = $_GET['bid'];
     try {
