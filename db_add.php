@@ -90,7 +90,7 @@ $conn = null;
 
             <div class="mb-3">
                 <label for="intro" class="form-label">簡介</label>
-                <textarea class="form-control" name="intro" id="intro" cols="80" rows="10"></textarea>
+                <textarea class="form-control ckeditor" name="intro" id="intro" cols="80" rows="10"></textarea>
             </div>
 
             <div class="mb-3 form-check">

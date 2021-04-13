@@ -49,7 +49,7 @@ if (isset($_GET['bid']) && $_GET['bid']!='') {
     <tr><th>出版社</th><td><?php echo $d['publisher'];?></td></tr>
     <tr><th>定價</th><td><?php echo $d['price'];?></td></tr>
     <tr><th>類型</th><td><?php echo $d['booktype'];?></td></tr>
-    <tr><th>內容</th><td><?php echo nl2br($d['intro']);?></td></tr>
+    <tr><th>內容</th><td><?php echo $d['intro'];?></td></tr>
     </tr>
 <?php
     $btype = array('1'=>"平裝", '2'=>'精裝', '3'=>'盒裝', '4'=>'其他');   
