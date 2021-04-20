@@ -51,7 +51,12 @@ $conn = null;
         foreach ($ds as $d){
           echo "<tr>";
           echo "<td>". $d['pubdate'] ."</td>";
-          echo '<td><a href="db_show.php?bid=' . $d['bid'] . '">';
+          echo '<td>'; 
+          $bookcover = 'images/cover/p'.$d['bid'].'.jpg';
+          if (file_exists($bookcover)) {
+            echo '<img src="'.$bookcover.'" alt="" height="30">';
+          }
+          echo '<a href="db_show.php?bid=' . $d['bid'] . '">';
           echo $d['bookname'] ."</a></td>";
           echo "<td>". $d['author'] ."</td>";
           echo "<td>". $d['publisher'] ."</td>";

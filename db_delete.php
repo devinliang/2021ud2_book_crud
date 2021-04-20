@@ -12,8 +12,17 @@ try {
       $sql = "DELETE FROM `book` WHERE `book`.`bid` = ".$bid;
       $sth = $conn->prepare($sql);
       $sth->execute();
-      
-      // echo "$bid 資料刪除成功!";
+
+      // 刪除封面圖
+      // $msg = "";
+      $bookcover = 'images/cover/p'.$bid.'.jpg';
+      if (file_exists($bookcover)) {
+          unlink($bookcover);
+          // $msg .= "刪除圖片且";
+      }
+
+      // $msg .= $bid ."資料刪除成功!";
+      // echo $msg;
       header("Location: dblist.php");
 
   } else {

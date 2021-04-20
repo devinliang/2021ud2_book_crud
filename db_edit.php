@@ -33,6 +33,40 @@ if (isset($_POST['submit'])) {
 
     $msg = "資料更新完成!";
 
+    if(isset($_FILES['cover'])) {
+    
+        $errors= array();
+        $file_name = $_FILES['cover']['name'];
+        $file_size = $_FILES['cover']['size'];
+        $file_tmp  = $_FILES['cover']['tmp_name'];
+        $file_type = $_FILES['cover']['type'];
+    
+        $extname  = explode('.',$_FILES['cover']['name']);
+        $file_ext = strtolower(end($extname));
+        
+        // 可接受的檔案格式
+        $extensions = array("jpeg","jpg","png");
+        
+        $msg .= " ok here";
+    
+        if (in_array($file_ext, $extensions)=== false) {
+           $msg = "extension not allowed, please choose a JPEG or PNG file.";
+        }
+        
+        if ($file_size > 2097152) {
+           $msg = 'File size must be excately 2 MB';
+        }
+        
+        if(empty($errors)==true){
+    
+           move_uploaded_file($file_tmp, "images/cover/p".$bid.".".$file_ext);
+           $msg .= " and cover upload Success";
+           
+        }else{
+           $msg .= " but Error upload image";
+        }
+      }
+
   } catch(PDOException $e) {
     
     echo "無法連線 Connection failed: " . $e->getMessage();
@@ -88,7 +122,7 @@ if (isset($_GET['bid']) && $_GET['bid']!='') {
                echo '<p class="alert alert-success">'.$msg."</p>";
            }
         ?>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="bookname" class="form-label">書名</label>
                 <input type="text" class="form-control" id="bookname" name="bookname" value="<?php echo $d['bookname'];?>" required>
@@ -151,7 +185,19 @@ if (isset($_GET['bid']) && $_GET['bid']!='') {
 
             <div class="input-group mb-3">
                 <label class="input-group-text" for="cover">上傳封面</label>
-                <input type="file" class="form-control" id="cover" name="cover">
+                <input type="file" class="form-control" id="cover" name="cover" name="cover" accept="image/*" onchange="preview_image(event)">
+            </div>
+
+            <div>
+                
+                <?php
+                    $bookcover = 'images/cover/p'.$d['bid'].'.jpg';
+                    if (file_exists($bookcover)) {
+                        echo '<img id="output_image" src="'.$bookcover.'" alt="" />';
+                    } else {
+                        echo '<img id="output_image"  />';
+                    }
+                ?>
             </div>
 
            <input type="hidden" name="bid" value="<?php echo $d['bid']; ?>">

@@ -1,6 +1,7 @@
 <?php
 include_once('config.php');
 
+
 if (isset($_POST["submit"])) {
 
     $bookname  = $_POST['bookname'];
@@ -10,6 +11,8 @@ if (isset($_POST["submit"])) {
     $pubdate   = $_POST['pubdate'];
     $price     = $_POST['price'];
     $intro     = $_POST['intro'];
+
+    
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);
@@ -21,7 +24,43 @@ try {
   $sth = $conn->prepare($sql);
   $sth->execute();
 
-  $msg = "資料成功新增";
+  $nid = $conn->lastInsertId();
+
+  $msg = "資料成功新增 with " . $nid;
+
+  if(isset($_FILES['cover'])) {
+    
+    $errors= array();
+    $file_name = $_FILES['cover']['name'];
+    $file_size = $_FILES['cover']['size'];
+    $file_tmp  = $_FILES['cover']['tmp_name'];
+    $file_type = $_FILES['cover']['type'];
+
+    $extname  = explode('.',$_FILES['cover']['name']);
+    $file_ext = strtolower(end($extname));
+    
+    // 可接受的檔案格式
+    $extensions = array("jpeg","jpg","png");
+    
+    $msg .= "ok here";
+
+    if (in_array($file_ext, $extensions)=== false) {
+       $msg = "extension not allowed, please choose a JPEG or PNG file.";
+    }
+    
+    if ($file_size > 2097152) {
+       $msg = 'File size must be excately 2 MB';
+    }
+    
+    if(empty($errors)==true){
+
+       move_uploaded_file($file_tmp, "images/cover/p".$nid.".".$file_ext);
+       $msg .= " and cover upload Success";
+       
+    }else{
+       $msg = "Error upload image";
+    }
+  }
 
 } catch(PDOException $e) {
 
@@ -41,7 +80,7 @@ $conn = null;
                echo '<p class="alert alert-success">'.$msg."</p>";
            }
         ?>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="bookname" class="form-label">書名</label>
                 <input type="text" class="form-control" id="bookname" name="bookname" placeholder="請輸入書名" required>
@@ -49,7 +88,7 @@ $conn = null;
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="booktype" id="inlineRadio1" value="1">
+                <input class="form-check-input" type="radio" name="booktype" id="inlineRadio1" value="1" checked>
                 <label class="form-check-label" for="inlineRadio1">平裝</label>
             </div>
 
@@ -100,7 +139,10 @@ $conn = null;
 
             <div class="input-group mb-3">
                 <label class="input-group-text" for="cover">上傳封面</label>
-                <input type="file" class="form-control" id="cover" name="cover">
+                <input type="file" class="form-control" id="cover" name="cover" accept="image/*" onchange="preview_image(event)">
+            </div>
+            <div>
+                <img id="output_image" />
             </div>
 
             <button type="submit" class="btn btn-primary" name="submit">確認新增</button>

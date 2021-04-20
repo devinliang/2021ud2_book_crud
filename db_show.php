@@ -55,7 +55,13 @@ if (isset($_GET['bid']) && $_GET['bid']!='') {
     $btype = array('1'=>"平裝", '2'=>'精裝', '3'=>'盒裝', '4'=>'其他');   
 ?>    
   </table>
-
+  <?php
+    $bookcover = 'images/cover/p'.$d['bid'].'.jpg';
+    if (file_exists($bookcover)) {
+      echo '<p>封面</p>';
+      echo '<img src="'.$bookcover.'" alt="">';
+    }
+  ?>
   </div>
 
   <?php include('footer.html'); ?>
